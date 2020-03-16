@@ -13,11 +13,10 @@ class App extends Component {
   }
 
   deleteChar = (charIndex) => {
-    // Create copy of text as array
     const text = this.state.text.split('')
     text.splice(charIndex, 1);
     const updatedText = text.join('');
-    this.setState({text: updatedText})
+    this.setState({text: updatedText, textLength: updatedText.length})
   }
 
   render() {
@@ -49,7 +48,11 @@ class App extends Component {
           <p>Hint: Keep in mind that JavaScript strings are basically arrays!</p>
         </div>
         <div className='solution'>
-          <input type='text' onChange={(event) => this.getLengthOfText(event)}/>
+          <input
+            type='text'
+            onChange={this.getLengthOfText}
+            value={this.state.text}
+          />
           <p>{this.state.textLength}</p>
           <p>{this.state.text}</p>
           <Validation lengthOfText={this.state.textLength}/>
